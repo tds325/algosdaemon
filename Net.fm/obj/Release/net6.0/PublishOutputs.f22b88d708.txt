@@ -1,0 +1,7 @@
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\Net.fm.exe
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\appsettings.json
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\Net.fm.dll
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\Net.fm.deps.json
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\Net.fm.runtimeconfig.json
+D:\Github\Net.fm\Net.fm\Net.fm\obj\Release\net6.0\PubTmp\Out\Net.fm.pdb
