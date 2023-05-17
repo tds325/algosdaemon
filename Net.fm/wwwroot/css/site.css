@@ -16,3 +16,51 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+.grid-item {
+    border-style: solid;
+    border-color: green;
+    border-width: .5em;
+    border-radius: 1em;
+    height: 15em;
+    width: 21em;
+}
+
+.cell-container {
+    margin: auto;
+    display: grid;
+    width: min-content;
+    grid-template-columns: repeat(3,1fr);
+    grid-column-gap: 0px;
+}
+
+.cell-item {
+    outline: 2px black solid;
+    aspect-ratio: 1;
+    height: 3em;
+    background-color: white;
+}
+
+.cell-item.alive:hover {
+    background-color: #5F5F5F;
+}
+
+.cell-item.dead:hover {
+    background-color: lightgrey;
+}
+
+.alive {
+    background-color: black;
+}
+
+.dead {
+    background-color: white;
+}

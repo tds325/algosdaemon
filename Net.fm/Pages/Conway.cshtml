@@ -1,0 +1,20 @@
+﻿@page "{title=Conway}"
+@using Net.fm.Data;
+@model Net.fm.Pages.ConwayModel
+@{
+    ViewData["Title"] = "Conway's Game of Life";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="cell-container" id="conwayContainer">
+    @foreach (Cell cell in ViewData.Model.cellGrid.cellArray )
+    {
+        <div class="cell-item @cell.GetStatusClass()"></div>
+    }
+</div>
+
+<a href="~/Conway/handler=updateModel" type="button" class="btn btn-secondary" id="startButton">click</a>
+
+<script src="~/js/dist/browser/signalr.js"></script>
+<script src="~/js/bind.js"></script>

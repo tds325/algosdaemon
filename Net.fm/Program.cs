@@ -1,3 +1,5 @@
+using Net.fm.Hubs;
+
 namespace Net.fm
 {
     public class Program
@@ -8,6 +10,8 @@ namespace Net.fm
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -27,6 +31,7 @@ namespace Net.fm
             app.UseAuthorization();
 
             app.MapRazorPages();
+            app.MapHub<BindHub>("/bindHub");
 
             app.Run();
         }
