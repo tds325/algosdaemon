@@ -15,22 +15,16 @@ namespace Net.fm.Hubs
 
         public async Task SetCellGrid(bool[] array)
         {
-            /*var oldCellArray = new bool[array.Length];
-            for(int index = 0; index < oldCellArray.Length; index++)
-            {
-                oldCellArray[index] = false;
-            }
-
-            for(int index = 0; index < array.Length; index++)
-            {
-                cellGrid.cellArray[index].SetStatus(array[index]);
-            }*/
-            for(int i = 0; i < array.Length; i++)
-            {
-                array[i] = !array[i];
-            }
-            await SendMessage(array);
-            
+            this.cellGrid = new CellGrid((int)Math.Sqrt(array.Length));
+            this.cellGrid.SetCellGrid(array);
+        }
+        
+        public async Task ConwayStep(bool[] array)
+        {
+            SetCellGrid(array);
+            while (cellGrid == null) { }
+            this.cellGrid.UpdateGrid();
+            await Clients.Caller.SendAsync("ReceiveMessage", cellGrid.GetBoolArray());
         }
         
     }

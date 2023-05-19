@@ -10,11 +10,6 @@
             this.IsAlive = false;
         }
 
-        public void SetStatus(bool status)
-        {
-            this.IsAlive = status;
-        }
-
         public void ToggleStatus()
         {
             this.IsAlive = !this.IsAlive;

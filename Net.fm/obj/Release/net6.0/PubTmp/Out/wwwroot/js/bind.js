@@ -42,6 +42,7 @@ function toggleCellStatus(id) {
 }
 
 function startConway() {
+    //startButton.disabled = true;
     var cellGrid = document.getElementById("conwayContainer");
 
     var cellArray = [];
@@ -50,12 +51,21 @@ function startConway() {
     }
     console.log(cellArray);
     try {
-        connection.invoke("setCellGrid", cellArray);
+        connection.invoke("conwayStep", cellArray);
+        //connection.invoke("setCellGrid", cellArray);
+        //connection.invoke("setCellGrid", cellArray).then(() => {connection.invoke("conwayStep", cellArray);}, failureCallBack);
+       // var promise = connection.invoke("setCellGrid", cellArray);
+        //console.log(promise);
+        
     } catch (error) {
         console.log(error);
     }
     
 
+}
+
+function failureCallBack(error) {
+    console.log(error);
 }
 
 function messageSentToClient() {
