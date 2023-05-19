@@ -7,14 +7,16 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="cell-container" id="conwayContainer">
+<div class="cell-container" id="conwayContainer" style="grid-template-columns: repeat(@((int)Math.Sqrt(ViewData.Model.cellGrid.cellArray.Length)),1fr);">
+    @{int index = 0;}
     @foreach (Cell cell in ViewData.Model.cellGrid.cellArray )
     {
-        <div class="cell-item @cell.GetStatusClass()"></div>
+        <div id ="@index" class="cell-item @cell.GetStatusClass()" onclick="toggleCellStatus(id)"></div>
+        index++;
     }
 </div>
 
-<a href="~/Conway/handler=updateModel" type="button" class="btn btn-secondary" id="startButton">click</a>
+<button class="btn btn-secondary" id="startButton">click</button>
 
-<script src="~/js/dist/browser/signalr.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/bind.js"></script>

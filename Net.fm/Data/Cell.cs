@@ -10,7 +10,7 @@
             this.IsAlive = false;
         }
 
-        private void SetStatus(bool status)
+        public void SetStatus(bool status)
         {
             this.IsAlive = status;
         }

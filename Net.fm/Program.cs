@@ -31,7 +31,7 @@ namespace Net.fm
             app.UseAuthorization();
 
             app.MapRazorPages();
-            app.MapHub<BindHub>("/bindHub");
+            app.MapHub<BindHub>("/Hubs/BindHub");
 
             app.Run();
         }

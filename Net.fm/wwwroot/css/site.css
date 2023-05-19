@@ -38,7 +38,6 @@ body {
     margin: auto;
     display: grid;
     width: min-content;
-    grid-template-columns: repeat(3,1fr);
     grid-column-gap: 0px;
 }
 

@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Github\Net.fm\Net.fm\Net.fm
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Github/Net.fm/Net.fm/Net.fm/Pages/Conway.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ud2F5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Github/Net.fm/Net.fm/Net.fm/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
