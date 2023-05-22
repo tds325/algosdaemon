@@ -2,23 +2,32 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/Hubs/BindHub").configureLogging(signalR.LogLevel.Debug).build();
 
-//document.addEventListener('DOMContentLoaded',  () => {
-    var startButton = document.getElementById("startButton")
+var conwayInterval;
+
+var timeInterval = document.getElementById("timeInterval");
+timeInterval.addEventListener("mouseup", updateOutputTimeIntervalHtml);
+
+var startButton = document.getElementById("startButton");
     startButton.addEventListener('click', (event) => {
-        startConway();
+        startConway(event);
         console.log(event);
 
     });
-//});
+
+var pauseButton = document.getElementById("pauseButton");
+pauseButton.addEventListener('click', (event) => {
+    pauseConway();
+    console.log(event);
+});
+
 
 startButton.disabled = true;
 
+var conwayRunning = false;
+
 connection.on("ReceiveMessage", (cellArray) => {
-    console.log("receive message processed");
     var domCellGrid = document.getElementById("conwayContainer");
-    console.log(domCellGrid);
     var children = domCellGrid.children;
-    console.log(children);
 
     var cellType;
     for (var index = 0; index < children.length; index++) {
@@ -41,27 +50,46 @@ function toggleCellStatus(id) {
     }
 }
 
-function startConway() {
-    //startButton.disabled = true;
-    var cellGrid = document.getElementById("conwayContainer");
+function updateOutputTimeIntervalHtml() {
+    document.getElementById("intervalOutput").textContent = (1000 - parseInt(timeInterval.value)) / 1000;
+    timeInterval = document.getElementById("timeInterval");
+}
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function startConway(event) {
+    startButton.disabled = true;
+    console.log(event);
+    conwayInterval = getInterval();
+}
+
+async function stepConway(event) {
+    console.log(timeInterval.value);
+    var cellGrid = document.getElementById("conwayContainer");
     var cellArray = [];
     for (var index = 0; index < cellGrid.children.length; index++) {
         cellArray.push(cellGrid.children[index].classList.contains("alive"));
     }
-    console.log(cellArray);
     try {
-        connection.invoke("conwayStep", cellArray);
-        //connection.invoke("setCellGrid", cellArray);
-        //connection.invoke("setCellGrid", cellArray).then(() => {connection.invoke("conwayStep", cellArray);}, failureCallBack);
-       // var promise = connection.invoke("setCellGrid", cellArray);
-        //console.log(promise);
-        
+        await connection.invoke("conwayStep", cellArray);
+
     } catch (error) {
         console.log(error);
     }
-    
+    clearInterval(conwayInterval);
 
+    conwayInterval = getInterval();
+}
+
+function getInterval() {
+    return setInterval(stepConway, 1000 - parseInt(timeInterval.value));
+}
+
+async function pauseConway() {
+    startButton.disabled = false;
+    clearInterval(conwayInterval);
 }
 
 function failureCallBack(error) {

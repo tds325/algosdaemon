@@ -12,7 +12,7 @@ namespace Net.fm.Pages
         public void OnGet(string title)
         {
             Title = title;
-            cellGrid = new CellGrid(20);
+            cellGrid = new CellGrid(35);
         }
 
         public void UpdateModel()
@@ -26,7 +26,6 @@ namespace Net.fm.Pages
         public void OnGetUpdateModel()
         {
             UpdateModel();
-            
         }
 
     }

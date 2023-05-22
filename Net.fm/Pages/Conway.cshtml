@@ -16,7 +16,13 @@
     }
 </div>
 
-<button class="btn btn-secondary" id="startButton">click</button>
+<button class="btn btn-secondary" id="startButton">Start</button>
+<button class="btn btn-secondary" id="pauseButton">Pause</button>
+
+<div class="slide-container" >
+    <input type="range" min="0" max="900" value="0" class="slider" id="timeInterval" />
+    <span>Tick interval: <output id="intervalOutput">1</output>s</span>
+</div>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/bind.js"></script>
