@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -11,8 +12,157 @@ html {
 html {
   position: relative;
   min-height: 100%;
+  margin: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    background: linear-gradient(-135deg, #313E51, #304C75, #225297, #0E5AC9);
+    background-size: 400% 400%;
+    animation: gradient 60s ease infinite;
+    height: 100vh;
+    display: table;
+    width:100%;
+}
+
+body > footer {
+    display: table-row;
+}
+
+nav {
+    background-color: #26232B;
+    border-bottom-color: black;
+}
+
+h1, h2 {
+    color: white;
+}
+
+img {
+    width: inherit;
+    height: inherit;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+footer {
+    bottom:0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    height: 4em;
+    position: relative !important;
+}
+
+.footer-container {
+    margin-right: 7em;
+    width: 12em;
+    height: 4em;
+    display: flex;
+    float: right;
+    padding-inline: 3em;
+}
+
+.footer-item {
+    padding-left: 2em;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    column-gap: 1em;
+    row-gap: 1em;
+    margin-top: 2em;
+}
+
+.grid-item {
+    border-style: solid;
+    border-color: #9FBAE2;
+    border-width: .75em;
+    border-radius: 1em;
+    height: 15em;
+    width: 21em;
+}
+
+.grid-item:hover {
+    border-color: #9EEBAC;
+}
+
+.cell-container {
+    margin: auto;
+    display: grid;
+    width: min-content;
+    grid-column-gap: 0px;
+    border-style: solid;
+    border-color: #132847;
+    border-width: 1em;
+    border-radius: 1em;
+    margin-top: 1.5em;
+}
+
+.cell-item {
+    outline: 2px solid;
+    outline-color: rgba(0,0,0,0.3);
+    aspect-ratio: 1;
+    height: 1.5em;
+    background-color: white;
+}
+
+.cell-item.alive:hover {
+    background-color: #5F5F5F;
+}
+
+.cell-item.dead:hover {
+    background-color: lightgrey;
+}
+
+.alive {
+    background-color: black;
+}
+
+.dead {
+    background-color: white;
+}
+
+.slide-container {
+    width: 100%;
+    margin-top: 1em;
+    margin:auto;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50%;
+    height: .5em;
+    background: #9EEBAC;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #60BB70;
+    cursor: pointer;
+    border-radius: 1em;
+    border-color: white;
 }

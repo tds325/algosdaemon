@@ -21,7 +21,7 @@ namespace Net.fm.Hubs
         
         public async Task ConwayStep(bool[] array)
         {
-            SetCellGrid(array);
+            await SetCellGrid(array);
             while (cellGrid == null) { }
             this.cellGrid.UpdateGrid();
             await Clients.Caller.SendAsync("ReceiveMessage", cellGrid.GetBoolArray());

@@ -3,27 +3,38 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/Hubs/BindHub").configureLogging(signalR.LogLevel.Debug).build();
 
 var conwayInterval;
+var safeToClear;
+var timeInterval;
+var startButton;
+var pauseButton;
 
-var timeInterval = document.getElementById("timeInterval");
-timeInterval.addEventListener("mouseup", updateOutputTimeIntervalHtml);
+document.addEventListener("DOMContentLoaded", () => {
+    timeInterval = document.getElementById("timeInterval");
+    timeInterval.addEventListener("mouseup", updateOutputTimeIntervalHtml);
 
-var startButton = document.getElementById("startButton");
+    startButton = document.getElementById("startButton");
     startButton.addEventListener('click', (event) => {
         startConway(event);
-        console.log(event);
-
     });
 
-var pauseButton = document.getElementById("pauseButton");
-pauseButton.addEventListener('click', (event) => {
-    pauseConway();
-    console.log(event);
+    pauseButton = document.getElementById("pauseButton");
+    pauseButton.addEventListener('click', (event) => {
+        pauseConway();
+    });
+
+    resetButton = document.getElementById("resetButton");
+    resetButton.addEventListener('click', (event) => {
+        await pauseConway();
+        let arrayLen = document.getElementById("conwayContainer").children.length;
+        var array = [];
+        for (var index = 0; index < arrayLen; index++) {
+            array.push(false);
+        }
+        await connection.invoke("conwayStep", array);
+    });
+
+    startButton.disabled = true;
 });
-
-
-startButton.disabled = true;
-
-var conwayRunning = false;
 
 connection.on("ReceiveMessage", (cellArray) => {
     var domCellGrid = document.getElementById("conwayContainer");
@@ -59,14 +70,13 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function startConway(event) {
+function startConway(event) {
     startButton.disabled = true;
-    console.log(event);
-    conwayInterval = getInterval();
+    safeToClear = false;
+    conwayInterval = getTimeout(conwayInterval);
 }
 
-async function stepConway(event) {
-    console.log(timeInterval.value);
+async function stepConway() {
     var cellGrid = document.getElementById("conwayContainer");
     var cellArray = [];
     for (var index = 0; index < cellGrid.children.length; index++) {
@@ -78,18 +88,41 @@ async function stepConway(event) {
     } catch (error) {
         console.log(error);
     }
-    clearInterval(conwayInterval);
-
-    conwayInterval = getInterval();
+    return timeInterval;
 }
 
-function getInterval() {
-    return setInterval(stepConway, 1000 - parseInt(timeInterval.value));
+async function getTimeout(interval) {
+    clearTimeout(interval);
+
+     return setTimeout(async function run() {
+        safeToClear = false;
+        var startTime = new Date();
+        var endTime;
+
+        await stepConway().then((timeInterval) => {
+            conwayInterval = setTimeout(async (timeInterval) => {
+                endTime = new Date();
+                var timeDiff = endTime - startTime;
+                if (timeDiff <= parseInt(timeInterval.value)) {
+                    sleep(parseInt(timeInterval.value) - timeDiff);
+                }
+                await run();
+            }, (1000 - parseInt(timeInterval.value)), timeInterval);
+        }, (error) => {
+            console.log(error);
+        });
+        safeToClear = true;
+    }, (1000 - parseInt(timeInterval.value)), timeInterval);
 }
 
 async function pauseConway() {
-    startButton.disabled = false;
-    clearInterval(conwayInterval);
+    if (safeToClear) {
+        clearTimeout(conwayInterval);
+        startButton.disabled = false;
+    }
+    else {
+        setTimeout(pauseConway, 100);
+    }
 }
 
 function failureCallBack(error) {

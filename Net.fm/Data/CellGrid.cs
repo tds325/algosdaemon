@@ -102,13 +102,13 @@ namespace Net.fm.Data
                 cellIndices[3] = -1;
                 cellIndices[5] = -1;
             }
-            if(index + 1 % sideLength == 0)
+            if((index + 1) % sideLength == 0)
             {
                 cellIndices[2] = -1;
                 cellIndices[4] = -1;
                 cellIndices[7] = -1;
             }
-            if(index + sideLength > (sideLength*sideLength)-1)
+            if((index) >= (sideLength*(sideLength-1)))
             {
                 cellIndices[5] = -1;
                 cellIndices[6] = -1;
@@ -117,21 +117,13 @@ namespace Net.fm.Data
             
             for(int i = 0; i < cellIndices.Length; i++)
             {
-                if (cellIndices[i] > 0 && cellIndices[i] < (sideLength * sideLength) - 1 && isAliveArray[cellIndices[i]])
+                if (cellIndices[i] > 0 && /*cellIndices[i] < cellIndices.Length &&*/ isAliveArray[cellIndices[i]])
                 {
                     sum = sum + 1;
                 }
 
             }
-/*
-            foreach(int num in cellIndices)
-            {
-                if(num > 0 && cellArray[num].IsAlive)
-                {
-                    sum += 1; 
-                }
-            }
-*/
+
             return sum;
         }
 

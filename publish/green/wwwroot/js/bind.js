@@ -4,26 +4,24 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/Hubs/BindHub").con
 
 var conwayInterval;
 
-var timeInterval = document.getElementById("timeInterval");
-timeInterval.addEventListener("mouseup", updateOutputTimeIntervalHtml);
+document.addEventListener("DOMContentLoaded", () => {
+    var timeInterval = document.getElementById("timeInterval");
+    timeInterval.addEventListener("mouseup", updateOutputTimeIntervalHtml);
 
-var startButton = document.getElementById("startButton");
+    var startButton = document.getElementById("startButton");
     startButton.addEventListener('click', (event) => {
         startConway(event);
         console.log(event);
-
     });
 
-var pauseButton = document.getElementById("pauseButton");
-pauseButton.addEventListener('click', (event) => {
-    pauseConway();
-    console.log(event);
+    var pauseButton = document.getElementById("pauseButton");
+    pauseButton.addEventListener('click', (event) => {
+        pauseConway();
+        console.log(event);
+    });
+
+    startButton.disabled = true;
 });
-
-
-startButton.disabled = true;
-
-var conwayRunning = false;
 
 connection.on("ReceiveMessage", (cellArray) => {
     var domCellGrid = document.getElementById("conwayContainer");
@@ -59,7 +57,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function startConway(event) {
+function startConway(event) {
     startButton.disabled = true;
     console.log(event);
     conwayInterval = getInterval();
@@ -78,13 +76,13 @@ async function stepConway(event) {
     } catch (error) {
         console.log(error);
     }
-    clearInterval(conwayInterval);
 
-    conwayInterval = getInterval();
+    conwayInterval = getInterval(conwayInterval);
 }
 
-function getInterval() {
-    return setInterval(stepConway, 1000 - parseInt(timeInterval.value));
+function getInterval(interval) {
+    clearInterval(interval);
+    return setInterval(async (event) => { await stepConway(event); }, 1000 - parseInt(timeInterval.value));
 }
 
 async function pauseConway() {

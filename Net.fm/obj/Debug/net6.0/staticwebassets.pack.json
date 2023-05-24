@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\Net.fm.bundle.scp.css"
     },
     {
+      "Id": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\5clusterassignment.PNG",
+      "PackagePath": "staticwebassets\\content\\5clusterassignment.PNG"
+    },
+    {
+      "Id": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\Client-server-model.svg.png",
+      "PackagePath": "staticwebassets\\content\\Client-server-model.svg.png"
+    },
+    {
+      "Id": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\game-of-life-loop-cropped.gif",
+      "PackagePath": "staticwebassets\\content\\game-of-life-loop-cropped.gif"
+    },
+    {
+      "Id": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\westerndigital.png",
+      "PackagePath": "staticwebassets\\content\\westerndigital.png"
+    },
+    {
       "Id": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
