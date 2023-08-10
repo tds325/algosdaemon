@@ -6,13 +6,27 @@ namespace Net.fm.Pages
 {
     public class ConwayModel : PageModel
     {
-        public string Title { get; set; }
+        private int _gridSideLen = 35;
+
+        [FromQuery(Name = "side")]
+        public int GridSideLen
+        {
+            get { return GridSideLen; }
+            set
+            {
+                if (value < 10 || value > 50)
+                {
+                    _gridSideLen = 35;
+                }
+                else _gridSideLen = value;
+            }
+        } 
+
         public CellGrid cellGrid;
 
-        public void OnGet(string title)
+        public void OnGet()
         {
-            Title = title;
-            cellGrid = new CellGrid(35);
+            cellGrid = new CellGrid(_gridSideLen);
         }
 
         public void UpdateModel()

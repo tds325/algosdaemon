@@ -18,7 +18,7 @@ html {
 body {
     background: linear-gradient(-135deg, #313E51, #304C75, #225297, #0E5AC9);
     background-size: 400% 400%;
-    animation: gradient 60s ease infinite;
+    animation: gradient 40s ease infinite;
     height: 100vh;
     display: table;
     width:100%;
@@ -54,6 +54,20 @@ img {
     100% {
         background-position: 0% 50%;
     }
+}
+
+.dropdown-container {
+    margin-top: 1.9em;
+    margin-left:auto;
+    margin-right: 0em;
+}
+
+#sideLen {
+    background-color: #1BB035;
+    border: 6px solid transparent;
+    border-radius: .25em;
+    width: 5em;
+    text-align: center;
 }
 
 footer {
@@ -108,13 +122,13 @@ footer {
     border-style: solid;
     border-color: #132847;
     border-width: 1em;
-    border-radius: 1em;
+    border-radius: 0.5em;
     margin-top: 1.5em;
 }
 
 .cell-item {
-    outline: 2px solid;
-    outline-color: rgba(0,0,0,0.3);
+    outline: 1px solid;
+    outline-color: rgba(0,0,0,1);
     aspect-ratio: 1;
     height: 1.5em;
     background-color: white;
@@ -136,8 +150,16 @@ footer {
     background-color: white;
 }
 
+.button-container {
+    display: inline-block;
+    margin: auto;
+    position: relative;
+    left: 42.4%;
+    margin-top: 1em;
+}
+
 .slide-container {
-    width: 100%;
+    width: 60%;
     margin-top: 1em;
     margin:auto;
 }
@@ -145,7 +167,7 @@ footer {
 .slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 50%;
+    width: 100%;
     height: .5em;
     background: #9EEBAC;
     outline: none;
@@ -159,6 +181,16 @@ footer {
 }
 
 .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #60BB70;
+    cursor: pointer;
+    border-radius: 1em;
+    border-color: white;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
     width: 25px;
     height: 25px;
     background: #60BB70;

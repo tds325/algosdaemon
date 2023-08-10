@@ -7,6 +7,7 @@ var safeToClear;
 var timeInterval;
 var startButton;
 var pauseButton;
+var mouseIsDown;
 
 document.addEventListener("DOMContentLoaded", () => {
     timeInterval = document.getElementById("timeInterval");
@@ -22,18 +23,46 @@ document.addEventListener("DOMContentLoaded", () => {
         pauseConway();
     });
 
-    resetButton = document.getElementById("resetButton");
-    resetButton.addEventListener('click', (event) => {
+    waitForElement("resetButton").then(fulfilled => {
+        try {
+            resetButton = document.getElementById("resetButton");
+        }
+        catch {
+
+        }
+    }, onrejected => {});
+    resetButton.addEventListener('click', async (event) => {
         await pauseConway();
         let arrayLen = document.getElementById("conwayContainer").children.length;
         var array = [];
         for (var index = 0; index < arrayLen; index++) {
             array.push(false);
         }
-        await connection.invoke("conwayStep", array);
+        connection.invoke("conwayStep", array);
     });
 
+    document.addEventListener('mousedown', (e) => { mouseIsDown = true; });
+    document.addEventListener('mouseup', (e) => { mouseIsDown = false; });
+
     startButton.disabled = true;
+
+    var sideLen = document.getElementById("sideLen");
+    
+    sideLen.addEventListener('input', (event) => {
+        var selectedOption = event.target.value;
+        resizeGrid(selectedOption);
+    });
+
+    try {
+        var selection = document.getElementById("sideLen");
+        var side = getQueryVariable("side");
+        side === undefined ? selection.value = 35 : selection.value = side;
+
+        document.getElementById("intervalOutput").value = (1000 - parseInt(document.getElementById("timeInterval").value)) / 1000;
+    }
+    catch (error) {
+        console.log(error)
+    }
 });
 
 connection.on("ReceiveMessage", (cellArray) => {
@@ -48,16 +77,57 @@ connection.on("ReceiveMessage", (cellArray) => {
     }
 });
 
-function toggleCellStatus(id) {
-    var cell = document.getElementById(id);
-    var isDead = cell.classList.contains("dead");
-    if (isDead) {
-        cell.classList.remove("dead");
-        cell.classList.add("alive");
+function dragStart(event) {
+    event.preventDefault();
+}
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var index = 0; index < vars.length; index++) {
+        var pair = vars[index].split("=");
+        if (pair[0] === variable) {
+            return pair[1];
+        }
     }
-    else {
-        cell.classList.remove("alive");
-        cell.classList.add("dead");
+}
+
+function resizeGrid(num) {
+    console.log("changed");
+    window.location.href = window.location.pathname + "?side=" + num;
+}
+
+function waitForElement(id) {
+    return new Promise(resolve => {
+        if (document.getElementById(id) !== null) {
+            return resolve(document.getElementById(id));
+        }
+        const observer = new MutationObserver(mutations => {
+            if (document.getElementById(id)) {
+                resolve(document.getElementById(id));
+                observer.disconnect;
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+function toggleCellStatus(id, bool) {
+    if (mouseIsDown || bool) {
+        var cell = document.getElementById(id);
+        var isDead = cell.classList.contains("dead");
+        if (isDead) {
+            cell.classList.remove("dead");
+            cell.classList.add("alive");
+        }
+        else {
+            cell.classList.remove("alive");
+            cell.classList.add("dead");
+        }
     }
 }
 
@@ -104,7 +174,7 @@ async function getTimeout(interval) {
                 endTime = new Date();
                 var timeDiff = endTime - startTime;
                 if (timeDiff <= parseInt(timeInterval.value)) {
-                    sleep(parseInt(timeInterval.value) - timeDiff);
+                    //sleep((parseInt(timeInterval.value) - timeDiff)/2);
                 }
                 await run();
             }, (1000 - parseInt(timeInterval.value)), timeInterval);

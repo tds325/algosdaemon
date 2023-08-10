@@ -117,7 +117,7 @@ namespace Net.fm.Data
             
             for(int i = 0; i < cellIndices.Length; i++)
             {
-                if (cellIndices[i] > 0 && /*cellIndices[i] < cellIndices.Length &&*/ isAliveArray[cellIndices[i]])
+                if (cellIndices[i] >= 0 && isAliveArray[cellIndices[i]])
                 {
                     sum = sum + 1;
                 }

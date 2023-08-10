@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "x10ohxAmLUQMldW0CIyxQDbaFpvhn/1nIb8lSyBEgvE=",
+  "Hash": "w95LTz++bkzdypZCIjTw3gzU4z1/1/I+MH7HmTnidwc=",
   "Source": "Net.fm",
   "BasePath": "_content/Net.fm",
   "Mode": "Default",
@@ -100,6 +100,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\content\\game-of-life-loop-cropped.gif"
+    },
+    {
+      "Identity": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\Sim04Cropped.gif",
+      "SourceId": "Net.fm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\",
+      "BasePath": "_content/Net.fm",
+      "RelativePath": "content/Sim04Cropped.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\content\\Sim04Cropped.gif"
+    },
+    {
+      "Identity": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\thebees2.gif",
+      "SourceId": "Net.fm",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\",
+      "BasePath": "_content/Net.fm",
+      "RelativePath": "content/thebees2.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\content\\thebees2.gif"
     },
     {
       "Identity": "D:\\Github\\Net.fm\\Net.fm\\Net.fm\\wwwroot\\content\\westerndigital.png",

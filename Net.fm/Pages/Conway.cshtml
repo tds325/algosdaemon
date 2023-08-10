@@ -3,28 +3,77 @@
 @model Net.fm.Pages.ConwayModel
 @{
     ViewData["Title"] = "Conway's Game of Life";
+    var sideLength = (int)Math.Sqrt(ViewData.Model.cellGrid.cellArray.Length);
+    var paddingStyle = "";
+    if(sideLength <= 15)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 30% 5em 0em auto 35.5%";
+    }
+    else if(sideLength <= 20)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 19% 5em 0em auto 25%";
+    }
+    else if (sideLength <= 25)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 18% 5em 0em auto 25%";
+    }
+    else if (sideLength <= 30)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns:  14% 5em 0em auto 20%";
+    }
+    else if (sideLength <= 35)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 9% 5em 1em auto 20%";
+    }
+    else if (sideLength <= 40)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 4.5% 5em 1em auto 20%";
+    }
+    else if (sideLength <= 50)
+    {
+        paddingStyle = "position:relative; display:grid; grid-template-columns: 0% 5em 1em auto 30%";
+    }
 }
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/bind.js"></script>
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="cell-container" id="conwayContainer" style="grid-template-columns: repeat(@((int)Math.Sqrt(ViewData.Model.cellGrid.cellArray.Length)),1fr);">
-    @{int index = 0;}
-    @foreach (Cell cell in ViewData.Model.cellGrid.cellArray )
-    {
-        <div id ="@index" class="cell-item @cell.GetStatusClass()" onclick="toggleCellStatus(id)"></div>
-        index++;
-    }
+<div style="@paddingStyle">
+    <div></div>
+    <div class="dropdown-container">
+        <select name="side" id="sideLen" class="btn-success">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+    </div>
+    <div></div>
+    <div class="cell-container" id="conwayContainer" style="grid-template-columns: repeat(@((int)Math.Sqrt(ViewData.Model.cellGrid.cellArray.Length)),1fr);" ondragstart="dragStart(event)">
+        @{int index = 0;}
+        @foreach (Cell cell in ViewData.Model.cellGrid.cellArray )
+        {
+            <div id ="@index" class="cell-item @cell.GetStatusClass()" onmouseover="toggleCellStatus(id)"  onmousedown="toggleCellStatus(id, true)" ondragstart="dragStart(event)"></div>
+            index++;
+        }
+    </div>
+    <div></div>
 </div>
 
-<button class="btn btn-secondary" id="startButton">Start</button>
-<button class="btn btn-secondary" id="pauseButton">Pause</button>
-<button class="btn btn-secondary" id="resetButton">Reset</button>
+<div class="button-container">
+    <button class="btn btn-success" id="startButton">Start</button>
+    <button class="btn btn-success" id="pauseButton">Pause</button>
+    <button class="btn btn-success" id="resetButton">Reset</button>
+</div>
 
 <div class="slide-container" >
-    <span style="color:white;">Tick interval: <output id="intervalOutput">1</output>s</span>
+    <span style="color:white;">Tick interval: ~<output id="intervalOutput">1</output>s</span>
     <br />
-    <input type="range" min="1" max="900" value="1" class="slider" id="timeInterval" />
+    <input type="range" min="0" max="900" value="0" class="slider" id="timeInterval" />
 </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/bind.js"></script>
+
