@@ -38,6 +38,9 @@
 <script src="~/js/bind.js"></script>
 
 <h1>@ViewData["Title"]</h1>
+<div>
+    <canvas id="glcanvas" width="640" height="480"></canvas>
+</div>
 
 <div style="@paddingStyle">
     <div></div>
@@ -71,9 +74,9 @@
 </div>
 
 <div class="slide-container" >
-    <span style="color:white;">Tick interval: ~<output id="intervalOutput">1</output>s</span>
+    <span style="color:white;">Tick interval: ~<output id="intervalOutput">0.1</output>s</span>
     <br />
-    <input type="range" min="0" max="900" value="0" class="slider" id="timeInterval" />
+    <input type="range" min="0" max="900" value="900" class="slider" id="timeInterval" />
 </div>
 
 

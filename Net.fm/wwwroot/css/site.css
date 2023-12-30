@@ -16,9 +16,10 @@ html {
 }
 
 body {
-    background: linear-gradient(-135deg, #313E51, #304C75, #225297, #0E5AC9);
+    /*background: linear-gradient(-135deg, #313E51, #304C75, #225297, #0E5AC9);*/
+    background-color:black;
     background-size: 400% 400%;
-    animation: gradient 40s ease infinite;
+    /*animation: gradient 40s ease infinite;*/
     height: 100vh;
     display: table;
     width:100%;
@@ -87,7 +88,7 @@ footer {
 .footer-container {
     margin-right: 7em;
     width: 12em;
-    height: 4em;
+    height: 5%;
     display: flex;
     float: right;
     padding-inline: 3em;
@@ -102,15 +103,20 @@ footer {
     width: 21em;
     height: 15em;
     perspective: 1000px;
+    margin:auto;
 }
 
 .flip-card-inner {
+    border-color: #9FBAE2;
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
     transition: transform 0.45s cubic-bezier(.47, 1.5, .7, 1.0);
     transform-style: preserve-3d;
+}
+
+.flip-card-inner:hover {
 }
 
 .flip-card:hover .flip-card-inner {
@@ -143,9 +149,20 @@ footer {
     font-family: 'Courier New', monospace;
 }
 
+#glcanvas {
+    margin:0;
+    padding:0;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: -1;
+}
+
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(auto-fill, minmax(min(21em,100%),1fr));
     grid-template-rows: auto;
     column-gap: 1em;
     row-gap: 1em;
@@ -158,10 +175,11 @@ footer {
     border-radius: 1em;
     height: 15em;
     width: 21em;
+    /*background-color: #9FBAE2;*/
+    /*border-color: #9FBAE2;*/
 }
 
 .grid-item:hover {
-    /*border-color: #9EEBAC;*/
 }
 
 .cell-container {
