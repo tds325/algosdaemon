@@ -5,7 +5,6 @@ main();
 
 function main() {
     const canvas = document.querySelector("#glcanvas");
-    let deltaTime = 0;
 
     const gl = canvas.getContext("webgl");
     //window.devicePixelRatio = 2;
@@ -17,14 +16,15 @@ function main() {
 
     // vertex shader
     const vsSource = `
+        uniform float uniTime;
         attribute vec4 aVertexPosition;
         attribute vec2 aTexcoord;
         uniform mat4 uModelViewMatrix;
-        uniform mat4 translation;
+        uniform vec4 translation;
         uniform mat4 uProjectionMatrix;
         varying vec2 vTexcoord;
         void main() {
-            gl_Position = uProjectionMatrix * uModelViewMatrix * (aVertexPosition + translation);
+            gl_Position = (uProjectionMatrix * uModelViewMatrix * (translation + aVertexPosition));
             vTexcoord = aTexcoord;
         }
     `;
@@ -50,6 +50,7 @@ function main() {
         uniformLocations: {
             projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
             modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+            translation: gl.getUniformLocation(shaderProgram, "translation"),
         },
     };
 
@@ -58,16 +59,7 @@ function main() {
 
     const buffers = initBuffers(gl);
 
-    let then = 0;
-    let translation = 0.0;
-    function render(now) {
-        now *= 0.001; // convert to seconds
-        deltaTime = now - then;
-        then = now;
-        drawScene(gl, programInfo, buffers, deltaTime);
-        requestAnimationFrame(render);
-    }
-    requestAnimationFrame(render);
+    drawScene(gl, programInfo, buffers);
 }
 
 function initShaderProgram(gl, vsSource, fsSource) {

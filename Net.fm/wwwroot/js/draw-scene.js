@@ -1,6 +1,6 @@
 import "./gl-matrix-min.js";
 
-function drawScene(gl, programInfo, buffers, deltaTime) {
+function drawScene(gl, programInfo, buffers) {
     console.log(buffers);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
@@ -56,7 +56,47 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
         const vertexCount = buffers.length * 6;
         const type = gl.UNSIGNED_SHORT;
         const offset = 0;
-        gl.drawElements(gl.LINES, vertexCount, type, offset);
+
+
+        let deltaTime = 0;
+        let then = 0;
+        let total = 0;
+        function render(now) {
+
+            now *= 0.001; // convert to seconds
+            deltaTime = now - then;
+            then = now;
+            total += deltaTime;
+            console.log(deltaTime);
+
+            var uniTimeLoc = gl.getUniformLocation(programInfo.program, 'uniTime');
+            gl.uniform1f(uniTimeLoc, deltaTime);
+            //console.log(uniTime);
+
+            var translationLoc = gl.getUniformLocation(programInfo.program, 'translation');
+            //gl.uniform4f(translationLoc, 0.0, 0.0, 0.0, 0.0);
+            gl.uniform4f(translationLoc, 0.0, .25 + Math.sin(total) / 5, 0.0, 0.0);
+
+            // prevent eventual overflow
+            total = total % (2 * Math.PI);
+
+            /*var translationMatrix = mat4.create();//= gl.getUniformLocation(programInfo.program, 'translation');
+            mat4.translate(
+                translationMatrix,
+                translationMatrix,
+                [0.0, deltaTime*10, 0.0],
+            );
+            ///var translationMatrix = mat4.create().translate(0.0, deltaTime, 0.0);
+            gl.uniformMatrix4fv(programInfo.uniformLocations.translation,
+                false,
+                translationMatrix,
+            );*/
+
+            gl.drawElements(gl.LINES, vertexCount, type, offset);
+
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
     }
 }
 
