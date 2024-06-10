@@ -6,7 +6,7 @@ main();
 function main() {
     const canvas = document.querySelector("#glcanvas");
 
-    const gl = canvas.getContext("webgl");
+    const gl = canvas.getContext("webgl", {antialias: true});
     //window.devicePixelRatio = 2;
 
     if (gl === null) {
@@ -19,24 +19,38 @@ function main() {
         uniform float uniTime;
         attribute vec4 aVertexPosition;
         attribute vec2 aTexcoord;
+        varying highp vec2 vTexcoord;
         uniform mat4 uModelViewMatrix;
-        uniform vec4 translation;
         uniform mat4 uProjectionMatrix;
-        varying vec2 vTexcoord;
+        uniform vec4 translation;
+        attribute float random;
+        float rand(vec2 co) {
+            return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+        }
         void main() {
-            gl_Position = (uProjectionMatrix * uModelViewMatrix * (translation + aVertexPosition));
+            mat4 isolateY = mat4(0,0,0,0,   0,1,0,0,  0,0,0,0,  0,0,0,0);
+            float yVal = dot((isolateY * aVertexPosition), vec4(1,1,1,1));
+            yVal = mod(yVal, 1.0);
+            yVal += rand(vec2(1.0, 1.0));
+            float cosVal = dot(translation, vec4(0,1,0,0));
+
+            vec2 xy = vec2(dot(aVertexPosition, vec4(1,0,0,0)), dot(aVertexPosition,vec4(0,1,0,0)));
+            yVal += rand(xy);
+
+            gl_Position = (uProjectionMatrix * uModelViewMatrix * (vec4(0,(cos(yVal+cosVal+(random/100.0))/4.0),0,0) + aVertexPosition));
             vTexcoord = aTexcoord;
         }
     `;
 
     // fragment shader
     const fsSource = `
+        precision mediump float;
         varying highp vec2 vTexcoord;
 
         uniform sampler2D uSampler;
 
         void main() {
-            gl_FragColor = vec4(1.0,1.0,1.0,1.0);//texture2D(uSampler, vTexcoord);
+            gl_FragColor = texture2D(uSampler, vTexcoord);
         }
     `;
 
@@ -46,10 +60,12 @@ function main() {
         program: shaderProgram,
         attribLocations: {
             vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPostion"),
+            textureCoord: gl.getAttribLocation(shaderProgram, "aTexcoord"),
         },
         uniformLocations: {
             projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
             modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+            uSampler: gl.getUniformLocation(shaderProgram, "uSampler"),
             translation: gl.getUniformLocation(shaderProgram, "translation"),
         },
     };

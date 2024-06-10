@@ -1,0 +1,7 @@
+Net.fm/Properties/*
+Net.fm/obj/*
+Net.fm/bin/*
+publish*
+*.sln
+.vs*
+3
