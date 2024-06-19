@@ -13,101 +13,114 @@
 
     <span style="color: white;">Created by Tayler Skirvin</span>
 
-    <div class="grid-container">
-        <div class="flip-card">
-            <a href="https://github.com/tds325/tie-command" title="tie-command">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/black_and_white_knot.png"/>
+    <div class="body-container">
+        <div></div>
+        <div class="grid-container">
+            <div class="flip-card">
+                <a href="https://github.com/tds325/tie-command" title="tie-command">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/black_and_white_knot.png"/>
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>tie-command</h3>
+                            <br/>
+                            <p>Bash utility allowing the user to store the last command used in a script. Useful for long setup processes that are easy to forget.</p>
+                        </div>
                     </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>tie-command</h3>
-                        <br/>
-                        <p>Bash program allowing the user to store the last command used in a script. Useful for long setup processes that are easy to forget.</p>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="https://github.com/tds325/ascii_gen" title="AsciiGen">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/ascii_koi.PNG"/>
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <img src="~/content/Koi-fish.jpg"/>
+                            <div style="position:absolute;text-align:left;color:white;top:8%;left:27%;transform:translate(-50%,-50%)">Ascii Generator</div>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="/Conway" title="Conway's game of life">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/thebees2.gif" />
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>Conway's Game of Life</h3>
+                            <br/>
+                            <p>Create various cellular automata and experiment with how they expand and contract over time.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="https://gitfront.io/r/user-1299430/EH1taeanJhBS/Operating-System-Simulator/" title="Operating System Simulator">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/Sim04Cropped.gif" />
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>Operating System Simulator</h3>
+                            <p>Simulator created in C for the purpose of simulating CPU scheduling algorithms. When given a set of processes from a config file, displays the operation in real time.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="https://gitfront.io/r/user-1299430/h7RM56yuNtpR/K-means-CS470/" title="Kmeans Clustering Algorithm">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/5clusterassignment.PNG" />
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>K-means Clustering Algorithm</h3>
+                            <p>K-means algorithm in R using data from the UCI Machine Learning Repository. Classifies the data elements via an iterative process that utilizes MSE as a loss function.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="https://gitfront.io/r/user-1299430/HwDn98KSqgFW/CS-465/" title="Distributed Systems">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/Client-server-model.svg.png" />
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>Distributed Systems</h3>
+                            <br />
+                            <p>Distributed System concepts put into practice, such as transaction management and peer-to-peer connections.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="flip-card">
+                <a href="https://gitfront.io/r/user-1299430/Hwec1N9MAj7h/VICE/" title="Validation Infrastructure in a Cloud Environment">
+                    <div class="flip-card-inner">
+                        <div class="grid-item flip-card-front">
+                            <img src="~/content/westerndigital.png" />
+                        </div>
+                        <div class="grid-item flip-card-back">
+                            <h3>VICE</h3>
+                            <p>Web-application created to streamline Western Digital's firmware validation process. Report creation, virtual machine scheduling, and other tools provided dependent on the user's role and login credentials.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="flip-card">
-            <a href="https://github.com/tds325/ascii_gen" title="AsciiGen">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/ascii_koi.PNG"/>
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <img src="~/content/Koi-fish.jpg"/>
-                        <div style="position:absolute;text-align:left;color:white;top:8%;left:27%;transform:translate(-50%,-50%)">Ascii Generator</div>
-                    </div>
-                </div>
-            </a>
+        <div></div>
+        <div class="resume-container">
+            <div class="resume-div" onclick="location.href='@Url.Action("Get", "Download")'" >
+                <!--Download icon svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                </svg>
+                <h3 style="margin-left:0.4em; margin-top:0.1em">Resume</h3>
+            </div>
         </div>
-        <div class="flip-card">
-            <a href="/Conway" title="Conway's game of life">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/thebees2.gif" />
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>Conway's Game of Life</h3>
-                        <br/>
-                        <p>Create various cellular automata and experiment with how they expand and contract over time.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="flip-card">
-            <a href="https://gitfront.io/r/user-1299430/EH1taeanJhBS/Operating-System-Simulator/" title="Operating System Simulator">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/Sim04Cropped.gif" />
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>Operating System Simulator</h3>
-                        <p>Program created in C for the purpose of simulating CPU scheduling algorithms. When given a set of processes from a config file, displays the operation in real time.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="flip-card">
-            <a href="https://gitfront.io/r/user-1299430/h7RM56yuNtpR/K-means-CS470/" title="Kmeans Clustering Algorithm">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/5clusterassignment.PNG" />
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>K-means Clustering Algorithm</h3>
-                        <p>K-means algorithm in R using data from the UCI Machine Learning Repository. Classifies the data elements via an iterative process that utilizes MSE as a loss function.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="flip-card">
-            <a href="https://gitfront.io/r/user-1299430/HwDn98KSqgFW/CS-465/" title="Distributed Systems">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/Client-server-model.svg.png" />
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>Distributed Systems</h3>
-                        <br />
-                        <p>Distributed System concepts put into practice, such as transaction management and peer-to-peer connections.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="flip-card">
-            <a href="https://gitfront.io/r/user-1299430/Hwec1N9MAj7h/VICE/" title="Validation Infrastructure in a Cloud Environment">
-                <div class="flip-card-inner">
-                    <div class="grid-item flip-card-front">
-                        <img src="~/content/westerndigital.png" />
-                    </div>
-                    <div class="grid-item flip-card-back">
-                        <h3>VICE</h3>
-                        <p>Web-application created to streamline Western Digital's firmware validation process. Report creation, virtual machine scheduling, and other tools provided dependent on the user's role and login credentials.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
     </div>
-</>
+</div>

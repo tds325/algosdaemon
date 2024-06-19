@@ -8,6 +8,8 @@ namespace Net.fm
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllers();
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -32,6 +34,10 @@ namespace Net.fm
 
             app.MapRazorPages();
             app.MapHub<BindHub>("/Hubs/BindHub");
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

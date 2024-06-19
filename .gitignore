@@ -3,5 +3,9 @@ Net.fm/obj/*
 Net.fm/bin/*
 publish*
 *.sln
+*.user
 .vs*
+node_modules
+package-lock.json
+package.json
 3

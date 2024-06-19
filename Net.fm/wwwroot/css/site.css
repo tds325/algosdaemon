@@ -25,6 +25,11 @@ body {
     width:100%;
 }
 
+.body-container {
+    display:grid;
+    grid-template-columns: 9% 82% 5% 1%;
+}
+
 body > footer {
     display: table-row;
 }
@@ -74,6 +79,10 @@ img {
     border-radius: .25em;
     width: 5em;
     text-align: center;
+}
+
+span {
+    font-family:'Courier';
 }
 
 footer {
@@ -228,6 +237,27 @@ footer {
     margin-top: 1em;
 }
 
+.resume-container {
+    color:white; 
+    font-family: Courier; 
+    display:flex; 
+    margin-top:1.75em;
+}
+
+.resume-div {
+    display:flex; 
+    height:3em;
+    width:inherit;
+    border-radius:.5em; 
+    border-color: white; 
+    border-style:solid;
+    aspect-ratio: 4/1;
+}
+
+.resume-div:hover {
+    border-color:#9EEBAC;
+}
+
 .slide-container {
     width: 60%;
     margin-top: 1em;
@@ -269,6 +299,15 @@ footer {
     border-color: white;
 }
 
+svg {
+    margin-left:.5em;
+    color:inherit;
+}
+
+resume-div:hover svg {
+    color: #9EEBAC;
+}
+
 div > ::-webkit-scrollbar {
     width: 0.7em;
     background-color: black;
@@ -291,4 +330,8 @@ div > ::-webkit-scrollbar-thumb {
     cursor: pointer;
     border-radius: 1em;
 
+}
+
+.container {
+    max-width:65%;
 }
