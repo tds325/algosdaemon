@@ -78,6 +78,21 @@ function main() {
     drawScene(gl, programInfo, buffers);
 }
 
+function resizeCanvasToDisplaySize(gl) {
+    var canvas = gl.canvas;
+    const displayWidth = canvas.clientWidth;
+    const displayHeight = canvas.clientHeight;
+
+    const needResize = canvas.width !== displayWidth ||
+                       canvas.height !== displayHeight;
+
+    if (needResize) {
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+    }
+    return needResize;
+}
+
 function initShaderProgram(gl, vsSource, fsSource) {
     const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
     const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
@@ -106,3 +121,5 @@ function loadShader(gl, type, source) {
     }
     return shader;
 }
+
+export { resizeCanvasToDisplaySize };

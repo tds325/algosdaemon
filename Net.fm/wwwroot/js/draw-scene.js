@@ -1,11 +1,11 @@
 import "./gl-matrix-min.js";
+import { resizeCanvasToDisplaySize } from "./canvas.js";
 
 function drawScene(gl, programInfo, buffers) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL); // near things obscure far things
-    //gl.enable(SAMPLE_ALPHA_TO_COVERAGE);
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -14,7 +14,7 @@ function drawScene(gl, programInfo, buffers) {
     // depth .1units -> 100 units away
 
     const fieldOfView = (45 * Math.PI) / 180; // in radians
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+    const aspect = 2560 / 1440;
     const zNear = 0.1;
     const zFar = 100.0;
     const projectionMatrix = mat4.create();
@@ -33,20 +33,10 @@ function drawScene(gl, programInfo, buffers) {
         [-0.0, 0.5, -3.0],
     );
      
-    /*mat4.fromXRotation(modelViewMatrix,  0.6);
-    mat4.translate(
-        modelViewMatrix,
-        modelViewMatrix,
-        [19.95, -3.0, -3.0],
-    );*/
-
-
     // tell webgl how to pull out the positions from the posbuffer
     // into the vertexposition attribute
     setPositionAttribute(gl, buffers, programInfo);
     setTextureAttribute(gl, buffers, programInfo);
-    //var translation = gl.getUniformLocation(programInfo.program, 'translation');
-    //gl.uniform4f(translation, 0.0, deltaTime*5, 0.0, 0.0, 0.0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
 
     gl.useProgram(programInfo.program);
@@ -76,6 +66,7 @@ function drawScene(gl, programInfo, buffers) {
         let then = 0;
         let total = 0;
         function render(now) {
+            resizeCanvasToDisplaySize(gl);
 
             now *= 0.001; // convert to seconds
             deltaTime = now - then;
@@ -116,10 +107,7 @@ function loadTexture(gl) {
     for (let h = 0; h < height; h++) {
         for (let w = 0; w < width; w++) {
             let val = 0;
-            /*if (h == w || h == w - 1 || h == w + 1) { //|| h==256-w || h==255-w) {
-                val = 255;
-            }
-            else*/ if (h < 4 || h > height - 4) {
+            if (h < 4 || h > height - 4) {
                 val = 255;
             }
             else if (w < 4 || w > width - 4) {
@@ -130,15 +118,6 @@ function loadTexture(gl) {
             pixel[index+2] = val;
             pixel[index+3] = val;
 
-            /*pixel[index] = index;
-            pixel[index+1] = index;
-            pixel[index+2] = index;
-            pixel[index+3] = 255;*/
-
-            /*pixel[index] = h;//h-w;
-            pixel[index + 1] = 0;//w-h;//h + w / 2;
-            pixel[index + 2] = 0;//w;
-            pixel[index + 3] = 255;*/
             index += 4;
         }
     }
