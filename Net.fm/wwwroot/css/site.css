@@ -3,12 +3,6 @@ html {
   height: 100%;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -28,6 +22,35 @@ body {
 .body-container {
     display:grid;
     grid-template-columns: 9% 82% 5% 1%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+  div.container {
+      max-width: 65%;
+  }
+  .grid-container {
+      scrollbar-color: auto;
+  }
+}
+
+@media (max-width: 1000px)
+{
+    .body-container {
+        grid-template-columns: auto;
+    }
+    div.container {
+        max-width: 100%;
+    }
+    .grid-container {
+        scrollbar-color: auto;
+    }
+    .resume-container {
+        margin: auto;
+        margin-top: 1.75em;
+    }
 }
 
 body > footer {
